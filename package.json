@@ -4,7 +4,8 @@
   "description": "Frontend for the my phr plus application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"Need to add\""
   },
   "repository": {
     "type": "git",
