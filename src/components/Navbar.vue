@@ -1,40 +1,32 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-    <div class="container">
-      <router-link to="/" class="navbar-brand">Vue Firebase Auth</router-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto"></ul>
-        <ul class="navbar-nav ml-auto">
-          <template v-if="user.loggedIn">
-            <div class="nav-item">{{user.data.displayName}}</div>
-            <li class="nav-item">
-              <a class="nav-link" @click.prevent="signOut">Sign out</a>
-            </li>
-          </template>
-          <template v-else>
-            <li class="nav-item">
-              <router-link to="login" class="nav-link">Login</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="register" class="nav-link">Register</router-link>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </div>
-  </nav>
+    <div>
+        <b-navbar toggleable="lg" type="dark" variant="success">
+            <b-container>
+                <b-navbar-brand href="/">MyPHR Plus</b-navbar-brand>
+                <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+                <b-collapse id="nav-collapse" is-nav>
+                <!-- Right aligned nav items -->
+                    <b-navbar-nav class="ml-auto">
+                        <template v-if="user.loggedIn">
+                            <b-nav-item-dropdown right>
+                                <template slot="button-content"><em>{{user.data.displayName}}</em></template>
+                                <b-dropdown-item href="#">Profile</b-dropdown-item>
+                                <b-dropdown-item href="/" @click.prevent="signOut">Sign Out</b-dropdown-item>
+                            </b-nav-item-dropdown>
+                        </template>
+                        <template v-else>
+                            <b-button-group>
+                                <b-button href="/login">Login</b-button>
+                                <b-button href="/register">Register</b-button>
+                            </b-button-group>
+                        </template>
+                    </b-navbar-nav>
+                </b-collapse>
+            </b-container>
+        </b-navbar>
+    </div>  
 </template>
+
 <script>
 import { mapGetters } from "vuex";
 import firebase from "firebase";

@@ -3,6 +3,10 @@ import App from './App.vue'
 import firebase from "firebase/app";
 import router from "./routes/index";
 import store from "./store";
+import BootstrapVue from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false
 
@@ -21,6 +25,8 @@ firebase.initializeApp(configOptions);
 firebase.auth().onAuthStateChanged(user => {
   store.dispatch("fetchUser", user);
 });
+
+Vue.use(BootstrapVue)
 
 new Vue({
   router,
