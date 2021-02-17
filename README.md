@@ -2,6 +2,8 @@
 
 Frontend for myPHRplus.A secure Personal Health Record web application built for Google Cloud in VUE.js
 
+Accessable on https://myphrplus-frontend.nw.r.appspot.com/
+
 ## Project setup
 
 ```
