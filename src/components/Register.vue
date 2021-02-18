@@ -11,16 +11,7 @@
                 <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                 <div class="col-md-6">
-                  <input
-                    id="name"
-                    type="name"
-                    class="form-control"
-                    name="name"
-                    value
-                    required
-                    autofocus
-                    v-model="form.name"
-                  />
+                  <input id="name" type="name"  class="form-control" name="name" value required autofocus v-model="form.name" />
                 </div>
               </div>
 
@@ -28,16 +19,7 @@
                 <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
 
                 <div class="col-md-6">
-                  <input
-                    id="email"
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    value
-                    required
-                    autofocus
-                    v-model="form.email"
-                  />
+                  <input id="email" type="email" class="form-control" name="email" value required autofocus v-model="form.email" />
                 </div>
               </div>
 
@@ -45,14 +27,7 @@
                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                 <div class="col-md-6">
-                  <input
-                    id="password"
-                    type="password"
-                    class="form-control"
-                    name="password"
-                    required
-                    v-model="form.password"
-                  />
+                  <input id="password" type="password" class="form-control" name="password" required v-model="form.password" />
                 </div>
               </div>
 
@@ -86,19 +61,32 @@ export default {
   },
   methods: {
     submit() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
-          data.user
-            .updateProfile({
+      firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password) //Creates user with firebase Auth
+        .then(data => {data.user.updateProfile({ 
               displayName: this.form.name
-            })
-            .then(() => {});
+            });
         })
         .catch(err => {
           this.error = err.message;
         });
+      firebase.auth().onAuthStateChanged((user) => { //Get the user object
+        if (user){
+          user.getIdToken(true).then((idToken) => { //Generate ID token
+            fetch('http://127.0.0.1:8081/registerPatient', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    uid : idToken,
+                    name : user.displayName,
+                    email : user.email
+                  })
+            }).then((res) => console.log(res));
+            this.$router.push({ name: 'Dashboard'});
+          })
+        }
+      });
     }
   }
 };

@@ -25,8 +25,7 @@ import firebase from "firebase";
 export default {
   computed: {
     ...mapGetters({
-// map `this.user` to `this.$store.getters.user`
-      user: "user"
+      user: "user" // maps `this.user` to `this.$store.getters.user`
     })
   },
   methods: {
@@ -36,7 +35,7 @@ export default {
         .signOut()
         .then(() => {
           this.$router.replace({
-            name: "home"
+            name: "Welcome"
           });
         });
     }

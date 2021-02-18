@@ -1,6 +1,8 @@
 # MyPHRplus-Frontend
 
-Frontend for myPHRplus.A secure Personal Health Record web application built for Google Cloud in VUE.js
+Frontend for myPHRplus. A secure Personal Health Record web application built for Google Cloud in VUE.js
+
+IF you want to run this project yourself, you will need to provide a firebase config in a sepetate config.js file
 
 ## Project setup
 
@@ -29,6 +31,6 @@ npm run lint
 ### To deploy to GAE
 
 ```
-gcloud init
+gcloud config configurations activate frontend
 gcloud builds submit
 ```
