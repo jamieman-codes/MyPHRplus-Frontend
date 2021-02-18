@@ -4,6 +4,8 @@ Frontend for myPHRplus. A secure Personal Health Record web application built fo
 
 IF you want to run this project yourself, you will need to provide a firebase config in a sepetate config.js file
 
+Accessible on https://myphrplus-frontend.nw.r.appspot.com/
+
 ## Project setup
 
 ```
