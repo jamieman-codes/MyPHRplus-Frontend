@@ -74,8 +74,12 @@ export default {
         if (user){
           user.getIdToken(true).then(async (idToken) => { //Generate ID token to be sent 
             const res = await ApiService.registerPatient(this.form.name, this.form.email, idToken);
-            
-            this.$router.push({ name: 'Dashboard'});
+            if(res.status == 201){
+              this.$router.push({ name: 'Dashboard'});
+            }
+            else{
+              this.error = res.data;
+              }
           })
         }
       });

@@ -1,15 +1,18 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { ApiService } from "@/components/api.js"
+
 Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: {
       loggedIn: false,
-      data: null
+      userName: null,
+      role: null
     }
   },
   getters: {
-    user(state){
+    user(state) {
       return state.user
     }
   },
@@ -17,20 +20,29 @@ export default new Vuex.Store({
     SET_LOGGED_IN(state, value) {
       state.user.loggedIn = value;
     },
-    SET_USER(state, data) {
-      state.user.data = data;
+    SET_USERNAME(state, userName) {
+      state.user.userName = userName;
+    },
+    SET_ROLE(state, role) {
+      state.user.role = role;
+    },
+    NO_USER(state) {
+      state.user.loggedIn = false;
+      state.user.userName = null;
+      state.user.role = null;
     }
   },
   actions: {
-    fetchUser({ commit }, user) {
+    async fetchUser({ commit }, user) {
       commit("SET_LOGGED_IN", user !== null);
       if (user) {
-        commit("SET_USER", {
-          displayName: user.displayName,
-          email: user.email
-        });
+        commit("SET_USERNAME", user.displayName);
+        const res = await ApiService.getUser();
+        if (res.status == 200) {
+          commit("SET_ROLE", res.data.role);
+        }
       } else {
-        commit("SET_USER", null);
+        commit("NO_USER");
       }
     }
   }

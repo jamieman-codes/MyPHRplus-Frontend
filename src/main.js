@@ -14,7 +14,7 @@ Vue.config.productionTip = false
 
 firebase.initializeApp(config);
 
-firebase.auth().onAuthStateChanged(user => {
+firebase.auth().onAuthStateChanged((user) => {
   store.dispatch("fetchUser", user);
 });
 
