@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import navbar from "./components/Navbar";
+import navbar from "./components/core/Navbar";
 import { mapGetters } from "vuex";
 export default {
   components: {
