@@ -63,26 +63,21 @@ export default {
   methods: {
     submit() {
       firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password) //Creates user with firebase Auth
-        .then(data => {data.user.updateProfile({ 
-              displayName: this.form.name
-            });
+        .then((data) => {
+              data.user.updateProfile({ displayName: this.form.name });
+              data.user.getIdToken(true).then(async (idToken) => { //Generate ID token to be sent 
+                const res = await ApiService.registerPatient(this.form.name, this.form.email, idToken);
+                if(res.status == 201){
+                  this.$router.push({ name: 'Dashboard'});
+                }
+                else{
+                  this.error = res.data;
+                }
+            })
         })
         .catch(errr => {
           this.error = errr.message;
         });
-      firebase.auth().onAuthStateChanged((user) => { //Get the user object
-        if (user){
-          user.getIdToken(true).then(async (idToken) => { //Generate ID token to be sent 
-            const res = await ApiService.registerPatient(this.form.name, this.form.email, idToken);
-            if(res.status == 201){
-              this.$router.push({ name: 'Dashboard'});
-            }
-            else{
-              this.error = res.data;
-              }
-          })
-        }
-      });
     }
   }
 };

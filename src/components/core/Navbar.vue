@@ -9,7 +9,7 @@
                     <b-navbar-nav class="ml-auto">
                           <b-nav-item-dropdown right>
                               <template slot="button-content"><em>{{user.userName}}</em></template>
-                              <b-dropdown-item href="#">Profile</b-dropdown-item>
+                              <b-dropdown-item href="/profile">Profile</b-dropdown-item>
                               <b-dropdown-item href="/" @click.prevent="signOut">Sign Out</b-dropdown-item>
                           </b-nav-item-dropdown>
                     </b-navbar-nav>

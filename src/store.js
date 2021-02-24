@@ -9,11 +9,17 @@ export default new Vuex.Store({
       loggedIn: false,
       userName: null,
       role: null
+    },
+    siteInfo: {
+      loading: false
     }
   },
   getters: {
     user(state) {
       return state.user
+    },
+    siteInfo(state) {
+      return state.siteInfo
     }
   },
   mutations: {
@@ -30,10 +36,14 @@ export default new Vuex.Store({
       state.user.loggedIn = false;
       state.user.userName = null;
       state.user.role = null;
+    },
+    SET_LOADING(state, loading) {
+      state.siteInfo.loading = loading;
     }
   },
   actions: {
     async fetchUser({ commit }, user) {
+      commit("SET_LOADING", true);
       commit("SET_LOGGED_IN", user !== null);
       if (user) {
         commit("SET_USERNAME", user.displayName);
@@ -44,6 +54,7 @@ export default new Vuex.Store({
       } else {
         commit("NO_USER");
       }
+      commit("SET_LOADING", false);
     }
   }
 });

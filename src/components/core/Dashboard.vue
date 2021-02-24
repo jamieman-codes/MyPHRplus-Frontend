@@ -5,7 +5,14 @@
         <div class="card">
           <div class="card-header">Dashboard</div>
           <div class="card-body">
-            <div v-if="user" class="alert alert-success" role="alert">You are a {{user.role}}</div>
+            <template v-if="siteInfo.loading">
+              <div class="text-center">
+                 <b-spinner variant="primary" type="grow" label="Spinning"></b-spinner>
+              </div>
+            </template>
+            <template v-else>
+              <div v-if="user" class="alert alert-success text-center" role="alert">You are a {{user.role}}</div>
+            </template>
           </div>
         </div>
       </div>
@@ -19,7 +26,8 @@ export default {
   computed: {
     // map `this.user` to `this.$store.getters.user`
     ...mapGetters({
-      user: "user"
+      user: "user",
+      siteInfo : "siteInfo"
     })
   }
 };

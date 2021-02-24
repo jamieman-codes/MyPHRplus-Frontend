@@ -1,20 +1,19 @@
 <template>
-    <div>
-        <b>Welcome to MyPHR+</b>
-        <template v-if="user.loggedIn">
-            <b-card>
-                <b>Welcome back {{user.data.displayName}}</b>
-                <b-button href="/dashboard">Enter</b-button>
-            </b-card>
-        </template>
-        <template v-else>
-            <b-card>
-                <b-button-group vertical>
-                    <b-button href="/login">Login</b-button>
-                    <b-button href="/register">Register</b-button>
-                </b-button-group>
-            </b-card>
-        </template>
+    <div class="row justify-content-center">
+        <b-card title="Welcome to MyPHR+">
+            <template v-if="user.loggedIn">
+                    <div class="text-center">
+                        <b>Welcome back {{user.userName}}</b>
+                        <b-button href="/dashboard">Enter</b-button>
+                    </div>
+            </template>
+            <template v-else>
+                    <div class="text-center">
+                        <b-button href="/login">Login</b-button>
+                        <b-button href="/register">Register</b-button>
+                    </div>
+            </template>
+        </b-card> 
     </div>
 </template>
 

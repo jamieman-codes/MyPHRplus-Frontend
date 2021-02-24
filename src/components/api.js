@@ -43,6 +43,11 @@ export const ApiService = (() => {
             return execute({
                 method: "GET", url: "/getUser"
             });
+        },
+        deleteUser() {
+            return execute({
+                method: "GET", url: "/deleteUser"
+            })
         }
     };
     return controller;

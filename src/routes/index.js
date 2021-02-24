@@ -4,6 +4,7 @@ import Login from '../components/core/Login'
 import Register from '../components/core/Register'
 import Dashboard from '../components/core/Dashboard'
 import Welcome from '../components/core/Welcome'
+import Profile from '../components/core/Profile'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ const router = new Router({
             path: '/',
             name: 'Welcome',
             component: Welcome
+        },
+        {
+            path: '/profile',
+            name: 'Profile',
+            component: Profile
         }
     ]
 });
