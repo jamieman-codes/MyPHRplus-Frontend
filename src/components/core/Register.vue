@@ -70,10 +70,11 @@ export default {
                 if(res.status == 201){
                   this.$router.push({ name: 'Dashboard'});
                 }
-                else{
-                  this.error = res.data;
-                }
             })
+            .catch(errr => {
+            data.user.delete(); //Delete user if registration fails 
+            this.error = errr.message;
+          });
         })
         .catch(errr => {
           this.error = errr.message;

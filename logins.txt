@@ -1,0 +1,17 @@
+Test logins:
+
+patient:
+Patient@email.com
+PatientPassword
+
+DR:
+datarequester@email.com
+DataRequesterPassword
+
+DP:
+dataprovider@email.com
+DataProviderPassword
+
+Sys Admin:
+admin@email.com
+AdminPassword

@@ -4,13 +4,13 @@
             <template v-if="user.loggedIn">
                     <div class="text-center">
                         <b>Welcome back {{user.userName}}</b>
-                        <b-button href="/dashboard">Enter</b-button>
+                        <b-button to="/dashboard">Enter</b-button>
                     </div>
             </template>
             <template v-else>
                     <div class="text-center">
-                        <b-button href="/login">Login</b-button>
-                        <b-button href="/register">Register</b-button>
+                        <b-button to="/login">Login</b-button>
+                        <b-button to="/register">Register</b-button>
                     </div>
             </template>
         </b-card> 

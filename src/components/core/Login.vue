@@ -54,6 +54,8 @@
 
 <script>
 import firebase from "firebase";
+import store from '@/store';
+import { ApiService } from '@/components/api.js';
 
 export default {
   data() {
@@ -71,7 +73,17 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then(() => {
-          this.$router.replace({ name: "Dashboard" });
+          store.commit("SET_LOGGED_IN", true);
+           ApiService.getRole().then((res) => {
+              if(res.data == "admin"){
+                 this.$router.push({ name: "Admin Dashboard" }).catch(() => {});
+              }
+              else{
+                this.$router.push({ name: "Dashboard" }).catch(() => {});
+              }
+           }).catch(() => {
+              this.$router.push({ name: "Welcome" }).catch(() => {});
+           })
         })
         .catch(err => {
           this.error = err.message;

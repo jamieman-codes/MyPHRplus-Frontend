@@ -22,6 +22,9 @@
 
 <script>
 import { mapGetters } from "vuex";
+import store from "@/store.js";
+import firebase from "firebase";
+
 export default {
   computed: {
     // map `this.user` to `this.$store.getters.user`
@@ -29,6 +32,12 @@ export default {
       user: "user",
       siteInfo : "siteInfo"
     })
+  },
+  mounted() {
+    var user = firebase.auth().currentUser;
+    if (user) {
+      store.dispatch("fetchUser", user);
+    }
   }
 };
 </script>

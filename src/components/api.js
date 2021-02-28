@@ -21,12 +21,13 @@ client.interceptors.request.use(async (config) => {
 *  Api service for interacting with the backend.
 */
 export const ApiService = (() => {
-    const execute = ({ method, url, data = {}, params = {} }) => {
+    const execute = ({ method, url, data = {}, params = {}, headers = {} }) => {
         return client({
             method,
             url,
             data,
-            params
+            params,
+            headers
         });
     };
     const controller = {
@@ -47,7 +48,20 @@ export const ApiService = (() => {
         deleteUser() {
             return execute({
                 method: "GET", url: "/deleteUser"
-            })
+            });
+        },
+        uploadFile(formData) {
+            return execute({
+                method: "POST", url: "/uploadFile", headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formData
+            });
+        },
+        getRole() {
+            return execute({
+                method: "GET", url: '/getUserRole'
+            });
         }
     };
     return controller;
