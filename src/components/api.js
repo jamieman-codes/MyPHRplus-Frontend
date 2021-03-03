@@ -31,12 +31,13 @@ export const ApiService = (() => {
         });
     };
     const controller = {
-        registerPatient(name, email, uid) {
+        registerPatient(name, email, uid, nhsnum) {
             return execute({
                 method: "POST", url: "/registerPatient", data: {
                     name,
                     email,
-                    uid
+                    uid,
+                    nhsnum
                 }
             });
         },

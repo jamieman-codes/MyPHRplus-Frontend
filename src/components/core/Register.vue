@@ -24,6 +24,14 @@
               </div>
 
               <div class="form-group row">
+                <label for="nhsnum" class="col-md-4 col-form-label text-md-right">NHS Number</label>
+
+                <div class="col-md-6">
+                  <input id="nhsnum" type="number" class="form-control" name="nhsnum" pattern="^\d{10}$" value required autofocus v-model="form.nhsnum" />
+                </div>
+              </div>
+
+              <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
                 <div class="col-md-6">
@@ -55,18 +63,28 @@ export default {
       form: {
         name: "",
         email: "",
-        password: ""
+        password: "",
+        nhsnum: ""
       },
       error: null
     };
   },
   methods: {
     submit() {
+      this.error = null;
+
+      let re = /^\d{10}$/;
+      if(!re.exec(this.form.nhsnum)){
+        this.error = "NHS Number not valid"
+        return;
+      }
+
+
       firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password) //Creates user with firebase Auth
         .then((data) => {
               data.user.updateProfile({ displayName: this.form.name });
               data.user.getIdToken(true).then(async (idToken) => { //Generate ID token to be sent 
-                const res = await ApiService.registerPatient(this.form.name, this.form.email, idToken);
+                const res = await ApiService.registerPatient(this.form.name, this.form.email, idToken, this.form.nhsnum);
                 if(res.status == 201){
                   this.$router.push({ name: 'Dashboard'});
                 }
