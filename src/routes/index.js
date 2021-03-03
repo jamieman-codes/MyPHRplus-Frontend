@@ -7,7 +7,9 @@ import Welcome from '../components/core/Welcome';
 import Profile from '../components/core/Profile';
 import MyRecords from '../components/patient/MyRecords';
 import AdminDash from '../components/admin/AdminDash';
-import Error404 from '../components/core/Error404'
+import registerDP from '../components/admin/registerDP';
+import Error404 from '../components/core/Error404';
+import registerDR from '../components/DP/registerDR';
 
 import { ApiService } from '../components/api.js';
 import store from '@/store';
@@ -61,12 +63,28 @@ const router = new Router({
             }
         },
         {
-            path: '/adminDashboard',
+            path: '/admin/Dashboard',
             name: 'Admin Dashboard',
             component: AdminDash,
             meta:
             {
                 requiresAuth: true, adminAuth: true
+            }
+        },
+        {
+            path: '/admin/registerDP',
+            name: 'Register DP',
+            component: registerDP,
+            meta: {
+                requiresAuth: true, adminAuth: true
+            }
+        },
+        {
+            path: '/registerDR',
+            name: 'Register DR',
+            component: registerDR,
+            meta: {
+                requiresAuth: true, adminAuth: false
             }
         },
         {

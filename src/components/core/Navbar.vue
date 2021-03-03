@@ -3,7 +3,7 @@
         <b-navbar toggleable="lg" type="dark" variant="success">
             <b-container>
                 <template v-if="user.role == 'admin'">
-                  <b-navbar-brand to="/adminDashboard">MyPHR+ Admin</b-navbar-brand>
+                  <b-navbar-brand to="/admin/dashboard">MyPHR+ Admin</b-navbar-brand>
                 </template>
                 <template v-else>
                   <b-navbar-brand to="/dashboard">MyPHR+</b-navbar-brand>
@@ -22,11 +22,11 @@
                   </template>
                   <template v-else-if="user.role =='DP'">
                     <b-nav-item href="#">Upload</b-nav-item>
-                    <b-nav-item href="#">Add Data Requester</b-nav-item>
+                    <b-nav-item to="/registerDR">Add DR</b-nav-item>
                   </template>
                   <template v-else-if="user.role =='admin'">
                     <b-nav-item href="#">View Logs</b-nav-item>
-                    <b-nav-item href="#">New DP</b-nav-item>
+                    <b-nav-item to="/admin/registerDP">Add DP</b-nav-item>
                   </template>
                 </b-navbar-nav>
                  <!-- Right aligned nav items -->

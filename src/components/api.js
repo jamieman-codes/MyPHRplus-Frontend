@@ -62,6 +62,24 @@ export const ApiService = (() => {
             return execute({
                 method: "GET", url: '/getUserRole'
             });
+        },
+        createNewDP(name, email, password) {
+            return execute({
+                method: "POST", url: "/newDP", data: {
+                    name,
+                    email,
+                    password
+                }
+            })
+        },
+        createNewDR(name, email, password) {
+            return execute({
+                method: "POST", url: "/newDR", data: {
+                    name,
+                    email,
+                    password
+                }
+            })
         }
     };
     return controller;

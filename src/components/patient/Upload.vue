@@ -18,14 +18,14 @@
         data(){
             return {
                 file: '',
-                error: '',
-                response:''
+                error: null,
+                response:null
             }
         },
         methods: {
             async submitFile(){
-                this.error = '';
-                this.response = '';
+                this.error = null;
+                this.response = null;
                 let formData = new FormData();
                 //Handle validation of file here!
                 formData.append('file', this.file);
