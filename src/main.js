@@ -3,7 +3,7 @@ import App from './App.vue'
 import firebase from "firebase/app";
 import router from "./routes/index";
 import store from "./store";
-import BootstrapVue from 'bootstrap-vue';
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
@@ -19,6 +19,7 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 
 new Vue({
   router,

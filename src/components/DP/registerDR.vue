@@ -67,7 +67,7 @@ export default {
             await ApiService.createNewDR(this.form.name, this.form.email, this.form.password).then( (res) => {
                     this.response = res.data
                 }).catch((errr) => {
-                    this.error= errr
+                    this.error= errr.response.data;
                 });
         }
     }

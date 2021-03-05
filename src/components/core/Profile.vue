@@ -32,18 +32,16 @@ export default {
   },
     methods: {
         async deleteUser() {
-            const res = await ApiService.deleteUser();
-            if(res.status == 200){
+            await ApiService.deleteUser().then( () => {
                 var user = firebase.auth().currentUser;
                 user.delete().then( () => {
                     this.$router.push({ name: 'Welcome'});
                 }).catch(function(error) {
                     this.error = error.message
                 });
-            } 
-            else{
-                this.error = "pie"
-            }
+            }).catch( (errr) => {
+                this.error = errr.response.data;
+            });
         }
     }
 }

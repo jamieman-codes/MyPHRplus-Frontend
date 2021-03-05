@@ -21,13 +21,14 @@ client.interceptors.request.use(async (config) => {
 *  Api service for interacting with the backend.
 */
 export const ApiService = (() => {
-    const execute = ({ method, url, data = {}, params = {}, headers = {} }) => {
+    const execute = ({ method, url, data = {}, params = {}, headers = {}, responseType = '' }) => {
         return client({
             method,
             url,
             data,
             params,
-            headers
+            headers,
+            responseType
         });
     };
     const controller = {
@@ -51,9 +52,9 @@ export const ApiService = (() => {
                 method: "GET", url: "/deleteUser"
             });
         },
-        uploadFile(formData) {
+        uploadFilePatient(formData) {
             return execute({
-                method: "POST", url: "/uploadFile", headers: {
+                method: "POST", url: "/uploadFilePatient", headers: {
                     'Content-Type': 'multipart/form-data'
                 },
                 data: formData
@@ -80,6 +81,16 @@ export const ApiService = (() => {
                     email,
                     password
                 }
+            })
+        },
+        getFiles(){
+            return execute({
+                method: "GET", url:"/getFiles"
+            })
+        },
+        downloadFile(fileRef){
+            return  execute({
+                method: "GET", url:"/downloadFile", params: {fileRef}, responseType: 'blob'
             })
         }
     };

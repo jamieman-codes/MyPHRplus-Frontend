@@ -91,7 +91,7 @@ export default {
             })
             .catch(errr => {
             data.user.delete(); //Delete user if registration fails 
-            this.error = errr.message;
+            this.error = errr.response.data;
           });
         })
         .catch(errr => {
