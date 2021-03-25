@@ -14,11 +14,8 @@
                      <b-nav-item href="#">Diary</b-nav-item>
                   </template>
                   <template v-else-if="user.role == 'DR'">
-                    <b-nav-item-dropdown text="Patients" right>
-                      <b-dropdown-item href="#">Records</b-dropdown-item>
-                      <b-dropdown-item href="#">Diaries</b-dropdown-item>
-                      <b-dropdown-item href="#">Reminders</b-dropdown-item>
-                    </b-nav-item-dropdown>
+                    <b-nav-item to="/myPatients">My Patients</b-nav-item>
+                    <b-nav-item href="#">My Files</b-nav-item>
                   </template>
                   <template v-else-if="user.role =='DP'">
                     <b-nav-item href="#">Upload</b-nav-item>

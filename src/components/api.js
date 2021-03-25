@@ -32,13 +32,14 @@ export const ApiService = (() => {
         });
     };
     const controller = {
-        registerPatient(name, email, uid, nhsnum) {
+        registerPatient(name, email, uid, nhsnum, parent) {
             return execute({
                 method: "POST", url: "/registerPatient", data: {
                     name,
                     email,
                     uid,
-                    nhsnum
+                    nhsnum,
+                    parent
                 }
             });
         },
@@ -91,6 +92,36 @@ export const ApiService = (() => {
         downloadFile(fileRef){
             return  execute({
                 method: "GET", url:"/downloadFile", params: {fileRef}, responseType: 'blob'
+            })
+        },
+        getAllDPs(){
+            return execute({
+                method: "GET", url:"/getAllDPs"
+            })
+        },
+        getPatients(){
+            return execute({
+                method: "GET", url:"/getPatients"
+            })
+        },
+        getPatientFiles(nhsNum){
+            return execute({
+                method: "GET", url:"/getPatientFiles", params: {nhsNum}
+            })
+        },
+        getPatientAttributes(nhsNum){
+            return execute({
+                method: "GET", url:"/getPatientAttributes", params: {nhsNum}
+            })
+        },
+        addAttribute(nhsNum, attribute){
+            return execute({
+                method: "POST", url:"/addAttribute", params: {nhsNum, attribute}
+            })
+        },
+        removeAttribute(nhsNum, attribute){
+            return execute({
+                method: "POST", url:"removeAttribute", params: {nhsNum, attribute}
             })
         }
     };

@@ -1,16 +1,16 @@
 Test logins:
 
 patient:
-Patient@email.com
-PatientPassword
+jamiestevens@email.com
+JamiesPassword
 
 DR:
-datarequester@email.com
-DataRequesterPassword
+johncogs@email.com
+JohnsPassword
 
 DP:
-dataprovider@email.com
-DataProviderPassword
+sotonhospital@email.com
+SotonPassword
 
 Sys Admin:
 admin@email.com

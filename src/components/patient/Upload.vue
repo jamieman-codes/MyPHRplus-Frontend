@@ -38,8 +38,8 @@
                         <label class="col-md-4 col-form-label text-md-right">Custom access policy:</label>
                         <div class="col-md-6">
                             <input id="customAccessPolicy" type="name"  class="form-control" name="customAccessPolicy" value required autofocus v-model="form.customAccessPolicy" />
-                            <small id="customPolicyHelp" class="form-text text-muted text-md-left">Please enter attributes of users you would like to access this file seperated by a comma.</small>
-                            <small id="customPolicyHelp" class="form-text text-muted text-md-left">E.G. "Diabetic,Under 25" will mean anyone with both the Diabetic and Under 25 attribute will be able to access the file</small>
+                            <small id="customPolicyHelp" class="form-text text-muted text-md-left">Please enter attributes of users you would like to access this file seperated by a comma. Attributes cannot contain spaces.</small>
+                            <small id="customPolicyHelp" class="form-text text-muted text-md-left">E.G. "Diabetic,Under25" will mean anyone with both the Diabetic and Under 25 attribute will be able to access the file</small>
                         </div>
                     </div>
 

@@ -10,6 +10,7 @@ import AdminDash from '../components/admin/AdminDash';
 import registerDP from '../components/admin/registerDP';
 import Error404 from '../components/core/Error404';
 import registerDR from '../components/DP/registerDR';
+import myPatients from '../components/DR/myPatients';
 
 import { ApiService } from '../components/api.js';
 import store from '@/store';
@@ -84,6 +85,13 @@ const router = new Router({
             name: 'Register DR',
             component: registerDR,
             meta: {
+                requiresAuth: true, adminAuth: false
+            }
+        },{
+            path: '/myPatients',
+            name: 'My Patients',
+            component: myPatients,
+            meta : {
                 requiresAuth: true, adminAuth: false
             }
         },

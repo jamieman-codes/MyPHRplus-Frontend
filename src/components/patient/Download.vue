@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div v-if="error" class="alert alert-danger">{{ error }}</div>
         <b-table striped bordered hover :busy="isBusy" :fields="fields" :items="items">
             <template #table-busy>
                 <div class="text-center text-danger my-2">
@@ -50,14 +51,15 @@ export default {
                 sortable: true
             },
             //{   key: "opened",
-            //    label: "Opened?"
+            //    label: "Opened?" 
             //},
             {
                 key: "ref",
                 label: ""
             }
         ],  
-        items: []
+        items: [],
+        error: null
       }
     },
     async mounted() {
@@ -72,14 +74,15 @@ export default {
     methods: {
         async downloadFile(fileRef, fileName){
             this.isBusy = true;
+            this.error = false;
             await ApiService.downloadFile(fileRef).then( (res) => {
                 console.log(res.headers);
                 var contentType = res.headers["content-type"];
                 var blob=new Blob([res.data], {type: contentType});// change resultByte to bytes
                 var fileDownload = require('js-file-download');
                 fileDownload(blob, fileName + "." + contentType.split("/")[1]);
-            }).catch((errr) => {
-                console.log(errr);
+            }).catch(() => {
+                this.error = "File could not be downloaded";
             });
             this.isBusy = false;
         }
