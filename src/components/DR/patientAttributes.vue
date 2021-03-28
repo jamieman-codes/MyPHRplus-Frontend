@@ -3,6 +3,7 @@
         <div class="card ">
             <div class="card-header">{{patient['name']}}'s Attributes</div>
             <div class="card-body text-center">
+                <div v-if="error" class="alert alert-danger">{{ error }}</div>
                 <b-table striped bordered hover :busy="isBusy" :fields="fields" :items="items">
                     <template #table-busy>
                         <div class="text-center text-danger my-2">
@@ -46,7 +47,7 @@ export default {
                 label: ""
             }
             ],  
-            items: [{attribute:"old"}],
+            items: [],
             error: null,
             attribute: ''
         }
@@ -64,20 +65,22 @@ export default {
         async addAtr(event) {
             event.preventDefault()
             this.isBusy = true;
-            await ApiService.addAttribute(this.patient['nhsNum'], this.attribute).then(() => {}).catch((errr) => {
-                console.log(errr);
+            await ApiService.addAttribute(this.patient['nhsNum'], this.attribute).then(() => {
+                this.items.push({attribute: this.attribute, delete: true});
+            }).catch((errr) => {
+                this.error = errr.response.data;
             });
-            this.items.push({attribute: this.attribute})
             this.isBusy = false;
       },
         async deleteAtr(attr){
             this.isBusy = true;
             await ApiService.removeAttribute(this.patient['nhsNum'], attr).then(() => {}).catch((errr) => {
-            console.log(errr);});
+                this.error = errr.response.data;
+            });
             await ApiService.getPatientAttributes(this.patient['nhsNum']).then( (res) =>{
                 this.items = res.data;
             }).catch((errr) => {
-                console.log(errr);
+                this.error = errr.response.data;
             });
             this.isBusy = false;
       } 

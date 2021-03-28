@@ -15,7 +15,7 @@
                   </template>
                   <template v-else-if="user.role == 'DR'">
                     <b-nav-item to="/myPatients">My Patients</b-nav-item>
-                    <b-nav-item href="#">My Files</b-nav-item>
+                    <b-nav-item to="/myFiles">My Files</b-nav-item>
                   </template>
                   <template v-else-if="user.role =='DP'">
                     <b-nav-item href="#">Upload</b-nav-item>

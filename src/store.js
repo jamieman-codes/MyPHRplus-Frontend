@@ -47,9 +47,9 @@ export default new Vuex.Store({
       commit("SET_LOGGED_IN", user !== null);
       if (user) {
         commit("SET_USERNAME", user.displayName);
-        const res = await ApiService.getUser();
+        const res = await ApiService.getRole();
         if (res.status == 200) {
-          commit("SET_ROLE", res.data.role);
+          commit("SET_ROLE", res.data);
         }
       } else {
         commit("NO_USER");

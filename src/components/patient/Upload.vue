@@ -82,7 +82,6 @@ export default {
         this.error = null;
         this.response = null;
         let formData = new FormData();
-        //Handle validation of file here!
         formData.append("file", this.form.file);
         formData.append("name", this.form.name);
         formData.append("accessPolicy", this.form.accessPolicy);

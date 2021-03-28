@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="card ">
-            <div class="card-header">MyRecords</div>
+            <div class="card-header">My Files</div>
             <div class="card-body text-center">
                 <div v-if="view == 'main'" class="row justify-content-center">
                     <div class="col-md-4">
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import upload from "@/components/patient/Upload";
+import upload from "@/components/DR/Upload";
 import download from "@/components/core/Download";
 
 export default {
