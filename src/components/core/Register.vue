@@ -48,7 +48,7 @@
                 <div class="form-group row">
                   <label for="DP" class="col-md-4 col-form-label text-md-right">Choose a hospital to Register with</label>
                   <div class="col-md-6">
-                    <b-form-select required :options="options" v-model="form.DP" ></b-form-select>
+                    <v-select label="text" required :options="options" v-model="form.DP" :reduce="text => text.value"></v-select>
                   </div>
                 </div>
 
@@ -91,7 +91,7 @@ export default {
     await ApiService.getAllDPs().then( (res) =>{
             this.options = res.data;
         }).catch((errr) => {
-            console.log(errr);
+            this.error = errr.response.data;
         });
   this.loading = false;
 
@@ -111,10 +111,9 @@ export default {
         .then((data) => {
               data.user.updateProfile({ displayName: this.form.name });
               data.user.getIdToken(true).then(async (idToken) => { //Generate ID token to be sent 
-                const res = await ApiService.registerPatient(this.form.name, this.form.email, idToken, this.form.nhsnum, this.form.DP);
-                if(res.status == 201){
+                await ApiService.registerPatient(this.form.name, this.form.email, idToken, this.form.nhsnum, this.form.DP).then(() => {
                   this.$router.push({ name: 'Dashboard'});
-                }
+                })
             })
             .catch(errr => {
             data.user.delete(); //Delete user if registration fails 

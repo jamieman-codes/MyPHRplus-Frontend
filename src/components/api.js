@@ -123,6 +123,19 @@ export const ApiService = (() => {
             return execute({
                 method: "POST", url:"removeAttribute", params: {nhsNum, attribute}
             })
+        },
+        uploadFile(formData){
+            return execute({
+                method: "POST", url: "/uploadFile", headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+                data: formData
+            });
+        },
+        deleteFile(fileRef){
+            return execute({
+                method: "POST", url: "/deleteFile", params: {fileRef}
+            })
         }
     };
     return controller;

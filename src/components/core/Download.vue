@@ -1,6 +1,7 @@
 <template>
     <div>
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
+        <div v-else-if="response" class="alert alert-success">{{ response }}</div>
         <b-table striped bordered hover :busy="isBusy" :fields="fields" :items="items">
             <template #table-busy>
                 <div class="text-center text-danger my-2">
@@ -28,7 +29,10 @@
                 </div>
             </template>
             <template #cell(ref)="data">
-                <b-button @click="downloadFile(data.value, data.item.fileName)">Download</b-button>
+                <b-button-group>
+                    <b-button variant="success" @click="downloadFile(data.value, data.item.fileName)">Download</b-button>
+                    <b-button variant="danger" @click="deleteFile(data.value, data.index)">Delete</b-button>
+                </b-button-group>
             </template>
         </b-table>
     </div>
@@ -50,16 +54,14 @@ export default {
                 key: "fileType",
                 sortable: true
             },
-            //{   key: "opened",
-            //    label: "Opened?" 
-            //},
             {
                 key: "ref",
                 label: ""
             }
         ],  
         items: [],
-        error: null
+        error: null,
+        response: null
       }
     },
     async mounted() {
@@ -67,23 +69,36 @@ export default {
         await ApiService.getFiles().then( (res) =>{
             this.items = res.data;
         }).catch((errr) => {
-            console.log(errr);
+            this.error = errr.response.data;
         });
         this.isBusy = false;
     },
     methods: {
         async downloadFile(fileRef, fileName){
             this.isBusy = true;
-            this.error = false;
+            this.error = null;
+            this.response = null;
             await ApiService.downloadFile(fileRef).then( (res) => {
-                console.log(res.headers);
                 var contentType = res.headers["content-type"];
                 var blob=new Blob([res.data], {type: contentType});// change resultByte to bytes
                 var fileDownload = require('js-file-download');
                 fileDownload(blob, fileName + "." + contentType.split("/")[1]);
-            }).catch(() => {
-                this.error = "File could not be downloaded";
+            }).catch((errr) => {
+                this.error = errr.response.data;
             });
+            this.isBusy = false;
+        },
+
+        async deleteFile(fileRef, pos){
+            this.isBusy = true;
+            this.error = null;
+            this.response = null;
+            await ApiService.deleteFile(fileRef).then( (res) => {
+                this.response = res.data;
+                this.items.splice(pos, 1);
+            }).catch((errr) => {
+                this.error = errr.response.data;
+            })
             this.isBusy = false;
         }
     },
