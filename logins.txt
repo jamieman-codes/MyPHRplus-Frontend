@@ -4,9 +4,15 @@ patient:
 jamiestevens@email.com
 JamiesPassword
 
+hannaproudie@gmail.com
+HannasPassword
+
 DR:
 johncogs@email.com
 JohnsPassword
+
+mikegears@email.com
+MikesPassword
 
 DP:
 sotonhospital@email.com
