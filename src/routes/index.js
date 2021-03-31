@@ -12,6 +12,8 @@ import Error404 from '../components/core/Error404';
 import registerDR from '../components/DP/registerDR';
 import myPatients from '../components/DR/myPatients';
 import myFiles from '../components/DR/myFiles';
+import files from '../components/DP/files';
+import editAttributes from '../components/DP/editAttributes'
 
 import { ApiService } from '../components/api.js';
 import store from '@/store';
@@ -99,6 +101,20 @@ const router = new Router({
             path: '/myFiles',
             name: 'My Files',
             component: myFiles,
+            meta: {
+                requiresAuth: true, adminAuth: false
+            }
+        },{
+            path: '/files',
+            name: 'Files',
+            component: files,
+            meta: {
+                requiresAuth: true, adminAuth: false
+            }
+        },{
+            path: '/editAttributes',
+            name: 'Edit Attributes',
+            component: editAttributes,
             meta: {
                 requiresAuth: true, adminAuth: false
             }

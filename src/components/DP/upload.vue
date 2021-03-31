@@ -94,7 +94,7 @@
                     <div class="form-group row">
                         <label for="DP" class="col-md-4 col-form-label text-md-right">Who can see the file?</label>
                         <div class="col-md-6">
-                            <v-select label="name" :options="availableUsers" multiple required v-model="form.users" :reduce="name => name.nhsNum"/>
+                            <v-select label="name" :options="availableUsers" multiple required v-model="form.users" :reduce="name => name.uid"/>
                         </div>
                     </div>
 
@@ -136,7 +136,7 @@ export default {
   },
   async mounted() {
       this.isBusy = true;
-        await ApiService.getPatients().then( (res) =>{
+        await ApiService.getAllInBucket().then( (res) =>{
             this.availableUsers = res.data;
         }).catch((errr) => {
             console.log(errr);

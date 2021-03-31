@@ -19,6 +19,7 @@
   "homepage": "https://myphrplus-frontend.nw.r.appspot.com ",
   "dependencies": {
     "@popperjs/core": "^2.6.0",
+    "@vue/cli": "^4.5.12",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",

@@ -12,12 +12,14 @@
                         </div>
                     </template>
                     <template #cell(delete)="data">
-                        <b-button variant="danger" @click="deleteAtr(data.item.attribute)">Remove</b-button>
+                        <div v-if="data.item.remove == true">
+                            <b-button variant="danger" @click="deleteAtr(data.item.attribute)">Remove</b-button>
+                        </div>
                     </template>
                 </b-table>
                 <b-form inline @submit="addAtr">
                     <label class="mr-sm-2" for="inline-form-input-name">New Attribute: </label>
-                    <b-form-input id="inline-form-input-name" class="mb-2 mr-sm-2 mb-sm-0" v-model="attribute" required />
+                    <b-form-input id="inline-form-input-name" class="mb-2 mr-sm-2 mb-sm-0" v-model="attribute" required onkeypress="return event.charCode != 32"/>
                     <b-button type="submit" variant="primary">Add</b-button>
                 </b-form>
             </div>
@@ -65,7 +67,7 @@ export default {
         async addAtr(event) {
             event.preventDefault()
             this.isBusy = true;
-            await ApiService.addAttribute(this.patient['nhsNum'], this.attribute).then(() => {
+            await ApiService.addPatientAttribute(this.patient['nhsNum'], this.attribute).then(() => {
                 this.items.push({attribute: this.attribute, delete: true});
             }).catch((errr) => {
                 this.error = errr.response.data;
@@ -74,7 +76,7 @@ export default {
       },
         async deleteAtr(attr){
             this.isBusy = true;
-            await ApiService.removeAttribute(this.patient['nhsNum'], attr).then(() => {}).catch((errr) => {
+            await ApiService.removePatientAttribute(this.patient['nhsNum'], attr).then(() => {}).catch((errr) => {
                 this.error = errr.response.data;
             });
             await ApiService.getPatientAttributes(this.patient['nhsNum']).then( (res) =>{

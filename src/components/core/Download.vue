@@ -83,8 +83,8 @@ export default {
                 var blob=new Blob([res.data], {type: contentType});// change resultByte to bytes
                 var fileDownload = require('js-file-download');
                 fileDownload(blob, fileName + "." + contentType.split("/")[1]);
-            }).catch((errr) => {
-                this.error = errr.response.data;
+            }).catch(() => {
+                this.error = "Could not download file, may have incorrect attributes"
             });
             this.isBusy = false;
         },

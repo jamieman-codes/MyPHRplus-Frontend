@@ -18,8 +18,9 @@
                     <b-nav-item to="/myFiles">My Files</b-nav-item>
                   </template>
                   <template v-else-if="user.role =='DP'">
-                    <b-nav-item href="#">Upload</b-nav-item>
+                    <b-nav-item to="/files">Upload</b-nav-item>
                     <b-nav-item to="/registerDR">Add DR</b-nav-item>
+                    <b-nav-item to="/editAttributes">Edit Attributes</b-nav-item>
                   </template>
                   <template v-else-if="user.role =='admin'">
                     <b-nav-item href="#">View Logs</b-nav-item>

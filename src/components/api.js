@@ -136,6 +136,26 @@ export const ApiService = (() => {
             return execute({
                 method: "POST", url: "/deleteFile", params: {fileRef}
             })
+        },
+        getAllInBucket(){
+            return execute({
+                method: "GET", url: "/getAllInBucket"
+            })
+        },
+        getUserAttributes(uid){
+            return execute({
+                method: "POST", url: "/getUserAttributes", params: {uid}
+            })
+        },
+        addUserAttribute(uid, attribute){
+            return execute({
+                method: "POST", url: "/addUserAttribute", params: {uid, attribute}
+            })
+        },
+        removeUserAttribute(uid, attribute){
+            return execute({
+                method: "POST", url: "/removeUserAttribute", params: {uid, attribute}
+            })
         }
     };
     return controller;

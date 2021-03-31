@@ -16,7 +16,7 @@
                         <b-button pill :disabled="isActive" size="sm" @click="setView('records')">View Records</b-button>
                         <b-button pill :disabled="isActive" size="sm" @click="setView('reminders')">View Reminders</b-button>
                         <b-button pill :disabled="isActive" size="sm" @click="setView('diary')">View Diary</b-button>
-                        <b-button pill :disabled="isActive" size="sm" @click="setView('attributes')">Edit Attributes</b-button>
+                        <b-button pill :disabled="isActive" size="sm" @click="setView('attributes')">View/Edit Attributes</b-button>
                     </p>
                 </div>
             </div>
@@ -76,9 +76,6 @@ export default {
         patientAttributes
     },
     methods: {
-        temp(){
-            console.log("hi")
-        },
         onRowSelected(items){
             this.isActive = false;
             this.selected = items;
