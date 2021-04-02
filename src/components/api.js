@@ -89,9 +89,9 @@ export const ApiService = (() => {
                 method: "GET", url:"/getFiles"
             })
         },
-        downloadFile(fileRef){
+        downloadFile(formData){
             return  execute({
-                method: "GET", url:"/downloadFile", params: {fileRef}, responseType: 'blob'
+                method: "POST", url:"/downloadFile", data: formData, responseType: 'blob'
             })
         },
         getAllDPs(){
@@ -104,24 +104,24 @@ export const ApiService = (() => {
                 method: "GET", url:"/getPatients"
             })
         },
-        getPatientFiles(nhsNum){
+        getPatientFiles(formData){
             return execute({
-                method: "GET", url:"/getPatientFiles", params: {nhsNum}
+                method: "POST", url:"/getPatientFiles", data: formData
             })
         },
-        getPatientAttributes(nhsNum){
+        getPatientAttributes(formData){
             return execute({
-                method: "GET", url:"/getPatientAttributes", params: {nhsNum}
+                method: "POST", url:"/getPatientAttributes", data: formData
             })
         },
-        addAttribute(nhsNum, attribute){
+        addPatientAttribute(formdata){
             return execute({
-                method: "POST", url:"/addAttribute", params: {nhsNum, attribute}
+                method: "POST", url:"/addPatientAttribute", data: formdata
             })
         },
-        removeAttribute(nhsNum, attribute){
+        removePatientAttribute(formdata){
             return execute({
-                method: "POST", url:"removeAttribute", params: {nhsNum, attribute}
+                method: "POST", url:"/removePatientAttribute", data: formdata
             })
         },
         uploadFile(formData){
@@ -132,29 +132,49 @@ export const ApiService = (() => {
                 data: formData
             });
         },
-        deleteFile(fileRef){
+        deleteFile(formData){
             return execute({
-                method: "POST", url: "/deleteFile", params: {fileRef}
+                method: "POST", url: "/deleteFile", data: formData
             })
         },
         getAllInBucket(){
             return execute({
-                method: "GET", url: "/getAllInBucket"
+                method: "POST", url: "/getAllInBucket"
             })
         },
-        getUserAttributes(uid){
+        getUserAttributes(formdata){
             return execute({
-                method: "POST", url: "/getUserAttributes", params: {uid}
+                method: "POST", url: "/getUserAttributes", data: formdata
             })
         },
-        addUserAttribute(uid, attribute){
+        addUserAttribute(formdata){
             return execute({
-                method: "POST", url: "/addUserAttribute", params: {uid, attribute}
+                method: "POST", url: "/addUserAttribute", data: formdata
             })
         },
-        removeUserAttribute(uid, attribute){
+        removeUserAttribute(formdata){
             return execute({
-                method: "POST", url: "/removeUserAttribute", params: {uid, attribute}
+                method: "POST", url: "/removeUserAttribute", data: formdata
+            })
+        },
+        getReminders(formdata){
+            return execute({
+                method: "POST", url: "/getReminders", data: formdata
+            })
+        },
+        addReminder(formdata){
+            return execute({
+                method: "POST", url: "/addReminder", data: formdata
+            })
+        },
+        removeReminder(formdata){
+            return execute({
+                method:"POST", url:"/removeReminder", data: formdata
+            })
+        },
+        getDashboardInfo(){
+            return execute({
+                method: "GET", url: "/getDashboardInfo"
             })
         }
     };

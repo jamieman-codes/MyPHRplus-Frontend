@@ -62,7 +62,9 @@ export default {
     },
     async mounted() {
         this.isBusy = true;
-        await ApiService.getPatientFiles(this.patient['nhsNum']).then( (res) =>{
+        let formData = new FormData();
+        formData.append("nhsNum", this.patient['nhsNum'])
+        await ApiService.getPatientFiles(formData).then( (res) =>{
             this.items = res.data;
         }).catch((errr) => {
             console.log(errr);
@@ -73,7 +75,9 @@ export default {
         async downloadFile(fileRef, fileName){
             this.isBusy = true;
             this.error = false;
-            await ApiService.downloadFile(fileRef).then( (res) => {
+            let formData = new FormData();
+            formData.append("fileRef", fileRef);
+            await ApiService.downloadFile(formData).then( (res) => {
                 console.log(res.headers);
                 var contentType = res.headers["content-type"];
                 var blob=new Blob([res.data], {type: contentType});// change resultByte to bytes

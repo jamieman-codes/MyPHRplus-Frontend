@@ -4,11 +4,12 @@
             <template v-if="user.loggedIn">
                     <div class="text-center">
                         <b>Welcome back {{user.userName}}</b>
+                        <br><br>
                         <template v-if="user.role == 'admin'">
-                            <b-button to="/admin/Dashboard">Enter</b-button>
+                            <b-button variant="success" to="/admin/Dashboard">Enter</b-button>
                         </template>
                         <template v-else>
-                            <b-button to="/dashboard">Enter</b-button>  
+                            <b-button variant="success" to="/dashboard">Enter</b-button>  
                         </template>
                     </div>
             </template>

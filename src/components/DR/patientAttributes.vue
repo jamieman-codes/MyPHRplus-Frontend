@@ -56,18 +56,23 @@ export default {
     },
     async mounted() {
         this.isBusy = true;
-        await ApiService.getPatientAttributes(this.patient['nhsNum']).then( (res) =>{
+        let formData = new FormData();
+        formData.append("nhsNum", this.patient['nhsNum']);
+        await ApiService.getPatientAttributes(formData).then( (res) =>{
             this.items = res.data;
         }).catch((errr) => {
-            console.log(errr);
+            this.error = errr.response.data;
         });
         this.isBusy = false;
     },
     methods: {
         async addAtr(event) {
             event.preventDefault()
-            this.isBusy = true;
-            await ApiService.addPatientAttribute(this.patient['nhsNum'], this.attribute).then(() => {
+            this.isBusy = true; 
+            let formData = new FormData();
+            formData.append("nhsNum", this.patient['nhsNum']);
+            formData.append("attribute", this.attribute);
+            await ApiService.addPatientAttribute(formData).then(() => {
                 this.items.push({attribute: this.attribute, delete: true});
             }).catch((errr) => {
                 this.error = errr.response.data;
@@ -76,7 +81,10 @@ export default {
       },
         async deleteAtr(attr){
             this.isBusy = true;
-            await ApiService.removePatientAttribute(this.patient['nhsNum'], attr).then(() => {}).catch((errr) => {
+            let formData = new FormData();
+            formData.append("nhsNum", this.patient['nhsNum']);
+            formData.append("attribute", attr);
+            await ApiService.removePatientAttribute(formData).then(() => {}).catch((errr) => {
                 this.error = errr.response.data;
             });
             await ApiService.getPatientAttributes(this.patient['nhsNum']).then( (res) =>{

@@ -122,7 +122,7 @@ export default {
             file: '',
             policy:{
                 numOfAtrs: 2,
-                options:[1],
+                options:[1,2],
                 selected:1,
                 buttonsDisabled: true,
                 attributes:[{}, {}]
@@ -164,9 +164,9 @@ export default {
             this.form.file = this.$refs.file.files[0];
         },
         newAttribute(policy){
-            policy.attributes.push({})
-            policy.options.push(policy.numOfAtrs);
+            policy.attributes.push({});
             policy.numOfAtrs += 1;
+             policy.options.push(policy.numOfAtrs);
             if(policy.numOfAtrs > 2){
                 policy.buttonsDisabled = false;
             }
@@ -190,7 +190,7 @@ export default {
             if(type=='sub-policy'){
                 attribute.value = {
                     numOfAtrs: 2,
-                    options:[1],
+                    options:[1,2],
                     selected:1,
                     buttonsDisabled: true,
                     attributes:[{}, {}]

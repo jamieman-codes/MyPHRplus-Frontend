@@ -78,7 +78,9 @@ export default {
             this.isBusy = true;
             this.error = null;
             this.response = null;
-            await ApiService.downloadFile(fileRef).then( (res) => {
+            let formData = new FormData();
+            formData.append("fileRef", fileRef);
+            await ApiService.downloadFile(formData).then( (res) => {
                 var contentType = res.headers["content-type"];
                 var blob=new Blob([res.data], {type: contentType});// change resultByte to bytes
                 var fileDownload = require('js-file-download');
@@ -93,7 +95,9 @@ export default {
             this.isBusy = true;
             this.error = null;
             this.response = null;
-            await ApiService.deleteFile(fileRef).then( (res) => {
+            let formData = new FormData();
+            formData.append("fileRef", fileRef);
+            await ApiService.deleteFile(formData).then( (res) => {
                 this.response = res.data;
                 this.items.splice(pos, 1);
             }).catch((errr) => {
