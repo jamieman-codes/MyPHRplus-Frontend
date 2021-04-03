@@ -113,8 +113,8 @@ export default {
             this.isBusy = true;
             this.view = "edit";
             let formData = new FormData();
-            formData.append("uid", this.selected[0]["uid"])
-            await ApiService.getUserAttributes(formData).then( (res) => {
+            formData.append("identifier", this.selected[0]["uid"])
+            await ApiService.getAttributes(formData).then( (res) => {
                     this.atrItems = res.data;
                 }).catch((errr) => {
                     console.log(errr);
@@ -124,12 +124,12 @@ export default {
         async deleteAtr(attr){
            this.isBusy = true;
             let formData = new FormData();
-            formData.append("uid", this.selected[0]["uid"]);
+            formData.append("identifier", this.selected[0]["uid"]);
             formData.append("attribute", attr)
-            await ApiService.removeUserAttribute(formData).then( async () => {
+            await ApiService.removeAttribute(formData).then( async () => {
                 let formData = new FormData();
-                formData.append("uid", this.selected[0]["uid"]);
-                await ApiService.getUserAttributes(formData).then( (res) =>{
+                formData.append("identifier", this.selected[0]["uid"]);
+                await ApiService.getAttributes(formData).then( (res) =>{
                     this.atrItems = res.data;
                 })
             }).catch((errr) => {
@@ -142,12 +142,12 @@ export default {
             this.isBusy = true;
             this.error = null;
             let formData = new FormData();
-            formData.append("uid", this.selected[0]["uid"]);
+            formData.append("identifier", this.selected[0]["uid"]);
             formData.append("attribute", this.attribute);
-            await ApiService.addUserAttribute(formData).then( async () => {
+            await ApiService.addAttribute(formData).then( async () => {
                 let formData = new FormData();
-                formData.append("uid", this.selected[0]["uid"]);
-                await ApiService.getUserAttributes(formData).then( (res) => {
+                formData.append("identifier", this.selected[0]["uid"]);
+                await ApiService.getAttributes(formData).then( (res) => {
                     this.atrItems = res.data;
                 }).catch(() => {
                     this.atrItems.push({attribute: this.attribute, delete: true});

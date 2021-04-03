@@ -46,6 +46,9 @@
 <script>
 import { mapGetters } from "vuex";
 import { ApiService } from "@/components/api.js";
+import store from "@/store.js";
+import firebase from "firebase/app";
+import 'firebase/auth';
 
 export default {
   data() {
@@ -70,12 +73,16 @@ export default {
     })
   },
   async mounted() {
+    this.loading = true;
+    var user = firebase.auth().currentUser;
+    if (user) {
+      store.dispatch("fetchUser", user);
+    }
     if(this.user.role == "DP"){
       this.cardTitle = this.user.userName + " PHR System";
     } else{
       this.cardTitle = "Welcome Back "+ this.user.userName;
     }
-    this.loading = true;
     await ApiService.getDashboardInfo().then( (res) => {
       this.dashboardData = res.data;
     }).catch( (errr) => {

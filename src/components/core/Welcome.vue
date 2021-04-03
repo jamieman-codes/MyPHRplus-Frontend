@@ -13,7 +13,7 @@
                         </template>
                     </div>
             </template>
-            <template v-else>
+            <template v-else-if="!user.loggedIn">
                     <div class="text-center">
                         <b-button to="/login">Login</b-button>
                         <b-button to="/register">Register</b-button>

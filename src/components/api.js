@@ -109,21 +109,6 @@ export const ApiService = (() => {
                 method: "POST", url:"/getPatientFiles", data: formData
             })
         },
-        getPatientAttributes(formData){
-            return execute({
-                method: "POST", url:"/getPatientAttributes", data: formData
-            })
-        },
-        addPatientAttribute(formdata){
-            return execute({
-                method: "POST", url:"/addPatientAttribute", data: formdata
-            })
-        },
-        removePatientAttribute(formdata){
-            return execute({
-                method: "POST", url:"/removePatientAttribute", data: formdata
-            })
-        },
         uploadFile(formData){
             return execute({
                 method: "POST", url: "/uploadFile", headers: {
@@ -142,17 +127,17 @@ export const ApiService = (() => {
                 method: "POST", url: "/getAllInBucket"
             })
         },
-        getUserAttributes(formdata){
+        getAttributes(formdata){
             return execute({
                 method: "POST", url: "/getUserAttributes", data: formdata
             })
         },
-        addUserAttribute(formdata){
+        addAttribute(formdata){
             return execute({
                 method: "POST", url: "/addUserAttribute", data: formdata
             })
         },
-        removeUserAttribute(formdata){
+        removeAttribute(formdata){
             return execute({
                 method: "POST", url: "/removeUserAttribute", data: formdata
             })
@@ -175,6 +160,26 @@ export const ApiService = (() => {
         getDashboardInfo(){
             return execute({
                 method: "GET", url: "/getDashboardInfo"
+            })
+        },
+        uploadDiary(formdata){
+            return execute({
+                method:"POST", url:"/uploadDiary", data: formdata
+            })
+        },
+        getDiaries(formData){
+            return execute({
+                method:"POST", url:"/getDiaries", data: formData
+            })
+        },
+        getDiary(formData){
+            return execute({
+                method:"POST", url:"/getDiary", data: formData
+            })
+        },
+        deleteDiary(formData){
+            return execute({
+                method: "POST", url:"/deleteDiary", data: formData
             })
         }
     };

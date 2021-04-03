@@ -6,6 +6,7 @@ import Dashboard from '../components/core/Dashboard';
 import Welcome from '../components/core/Welcome';
 import Profile from '../components/core/Profile';
 import MyRecords from '../components/patient/MyRecords';
+import Diary from '../components/patient/Diary';
 import AdminDash from '../components/admin/AdminDash';
 import registerDP from '../components/admin/registerDP';
 import Error404 from '../components/core/Error404';
@@ -61,6 +62,15 @@ const router = new Router({
             path: '/myrecords',
             name: 'MyRecords',
             component: MyRecords,
+            meta:
+            {
+                requiresAuth: true, adminAuth: false
+            }
+        },
+        {
+            path: '/diary',
+            name: 'Diary',
+            component: Diary,
             meta:
             {
                 requiresAuth: true, adminAuth: false

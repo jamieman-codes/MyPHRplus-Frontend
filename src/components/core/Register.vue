@@ -68,7 +68,8 @@
 
 
 <script>
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/auth';
 import { ApiService } from "@/components/api.js"
 
 export default {

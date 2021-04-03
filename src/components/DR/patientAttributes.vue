@@ -57,8 +57,8 @@ export default {
     async mounted() {
         this.isBusy = true;
         let formData = new FormData();
-        formData.append("nhsNum", this.patient['nhsNum']);
-        await ApiService.getPatientAttributes(formData).then( (res) =>{
+        formData.append("identifier", this.patient['nhsNum']);
+        await ApiService.getAttributes(formData).then( (res) =>{
             this.items = res.data;
         }).catch((errr) => {
             this.error = errr.response.data;
@@ -70,10 +70,13 @@ export default {
             event.preventDefault()
             this.isBusy = true; 
             let formData = new FormData();
-            formData.append("nhsNum", this.patient['nhsNum']);
+            formData.append("identifier", this.patient['nhsNum']);
             formData.append("attribute", this.attribute);
-            await ApiService.addPatientAttribute(formData).then(() => {
-                this.items.push({attribute: this.attribute, delete: true});
+            await ApiService.addAttribute(formData).then(() => {}).catch((errr) => {
+                this.error = errr.response.data;
+            });
+            await ApiService.getAttributes(formData).then( (res) =>{
+                this.items = res.data;
             }).catch((errr) => {
                 this.error = errr.response.data;
             });
@@ -82,12 +85,12 @@ export default {
         async deleteAtr(attr){
             this.isBusy = true;
             let formData = new FormData();
-            formData.append("nhsNum", this.patient['nhsNum']);
+            formData.append("identifier", this.patient['nhsNum']);
             formData.append("attribute", attr);
-            await ApiService.removePatientAttribute(formData).then(() => {}).catch((errr) => {
+            await ApiService.removeAttribute(formData).then(() => {}).catch((errr) => {
                 this.error = errr.response.data;
             });
-            await ApiService.getPatientAttributes(this.patient['nhsNum']).then( (res) =>{
+            await ApiService.getAttributes(formData).then( (res) =>{
                 this.items = res.data;
             }).catch((errr) => {
                 this.error = errr.response.data;
