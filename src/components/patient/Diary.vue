@@ -108,23 +108,31 @@ export default {
             this.response = null;
             if(this.name == ""){
                 this.error = "Please enter a title";
-            }else if(this.content == ""){
-                this.error = "Please enter some text";
-            } else {
-                let formData = new FormData();
-                formData.append("name", this.name);
-                formData.append("content", this.content);
-                await ApiService.uploadDiary(formData).then((res) => {
-                    this.response = res.data;
-                }).catch((errr) => {
-                    this.error = errr.response.data;
-                })
-                await ApiService.getDiaries("").then((res) => {
-                    this.items = res.data
-                }).catch((errr) => {
-                    this.error = errr.response.data;
-                })
+                return; 
             }
+            let NameRE = /^[a-zA-Z0-9 !@#&()`.+,/"-]*$/
+            if(!NameRE.exec(this.name)){
+                this.error = "Title is not valid, please enter only alphanumeric characters or symbols: !@#&()`.+,/\"-"
+                return;
+            }
+            if(this.content == ""){
+                this.error = "Please enter some content";
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("name", this.name);
+            formData.append("content", this.content);
+            await ApiService.uploadDiary(formData).then((res) => {
+                this.response = res.data;
+            }).catch((errr) => {
+                this.error = errr.response.data;
+            })
+            await ApiService.getDiaries("").then((res) => {
+                this.items = res.data
+            }).catch((errr) => {
+                this.error = errr.response.data;
+            })
         },
         async viewDiaryEntry(value){
             this.error = null;

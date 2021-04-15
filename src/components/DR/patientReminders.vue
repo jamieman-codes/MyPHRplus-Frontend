@@ -44,7 +44,12 @@ export default {
     },
     methods: {
         async addReminder(event){
-            event.preventDefault();
+            this.error = null;
+            let reminderRE = /^[a-zA-Z0-9 !@#$&()`.+,/"-]*$/;
+            if(!reminderRE.exec(this.reminder)){
+                this.error = "Invalid reminder entered"
+                return;
+            }
             this.isBusy = true;
             let formData = new FormData();
             formData.append("nhsNum", this.patient['nhsNum']);
@@ -55,6 +60,7 @@ export default {
                 this.error = errr.response.data;
             });
             this.isBusy = false;
+            event.preventDefault();
         }
     },
     async mounted() {

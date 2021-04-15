@@ -146,6 +146,12 @@ export default {
   methods: {
         async submit(){
             this.error = null;
+            let NameRE = /^[a-zA-Z0-9 !@#&()`.+,/"-]*$/
+            if(!NameRE.exec(this.form.name)){
+                this.error = "Title is not valid, please enter only alphanumeric characters or symbols: !@#&()`.+,/\"-"
+                return;
+            }
+            
             this.response = null;
             this.loading = true;
             let formData = new FormData();

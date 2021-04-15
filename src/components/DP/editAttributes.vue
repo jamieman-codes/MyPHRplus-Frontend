@@ -139,8 +139,13 @@ export default {
         },
         async addAtr(event){
             event.preventDefault();
-            this.isBusy = true;
             this.error = null;
+            let regex = /^[a-zA-Z0-9_]*$/
+            if(!regex.exec(this.attribute)){
+                this.error = "Invalid attribute entered";
+                return;
+            }
+            this.isBusy = true;
             let formData = new FormData();
             formData.append("identifier", this.selected[0]["uid"]);
             formData.append("attribute", this.attribute);

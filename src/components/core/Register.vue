@@ -101,9 +101,14 @@ export default {
     submit() {
       this.error = null;
 
-      let re = /^\d{10}$/;
-      if(!re.exec(this.form.nhsnum)){
-        this.error = "NHS Number not valid"
+      let NameRE = /^[a-z ,.'-]+$/i;
+      if(!NameRE.exec(this.form.name)){
+        this.error = "Name should only contain letters or symbols(, . ' -)"
+        return;
+      }
+      let NHSre = /^\d{10}$/;
+      if(!NHSre.exec(this.form.nhsnum)){
+        this.error = "NHS Number not valid (Should be 10 digits)"
         return;
       }
 
