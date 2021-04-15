@@ -181,6 +181,11 @@ export const ApiService = (() => {
             return execute({
                 method: "POST", url:"/deleteDiary", data: formData
             })
+        },
+        viewFileLogs(formData){
+            return execute({
+                method:"POST", url:"/viewFileLogs", data: formData
+            })
         }
     };
     return controller;

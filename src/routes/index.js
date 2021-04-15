@@ -16,7 +16,6 @@ import myFiles from '../components/DR/myFiles';
 import files from '../components/DP/files';
 import editAttributes from '../components/DP/editAttributes'
 
-import { ApiService } from '../components/api.js';
 import store from '@/store';
 
 Vue.use(Router)
@@ -141,21 +140,17 @@ router.beforeEach(async (to, from, next) => {
     if (to.meta.requiresAuth) { //Does request need auth
         var user = store.getters.user;
         if (user.loggedIn) {
-            ApiService.getRole().then((res) => {
-                var role = res.data;
-                if (to.meta.adminAuth) { //Does request need admin auth
-                    if (role == "admin") {
-                        next();
-                    }
-                    else {
-                        next({ name: 'Error 404' });
-                    }
-                } else { //Request doesn't need admin auth
+            var role = user.role;
+            if (to.meta.adminAuth) { //Does request need admin auth
+                if (role == "admin") {
                     next();
                 }
-            }).catch(() => {
-                next({ name: 'Welcome' });
-            });
+                else {
+                    next({ name: 'Error 404' });
+                }
+            } else { //Request doesn't need admin auth
+                next();
+            }
         }
         else {
             next({ name: 'Welcome' });

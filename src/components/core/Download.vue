@@ -20,26 +20,25 @@
                     <p class="h3 mb-2"><b-icon-file-earmark-music/></p>
                 </div>
             </template>
-            <template #cell(opened)="data">
-                <div v-if="data.value">
-                    <p class="h3 mb-2"><b-icon-check/></p>
-                </div>
-                <div v-else>
-                    <p class="h3 mb-2"><b-icon-x/></p>
-                </div>
-            </template>
             <template #cell(ref)="data">
                 <b-button-group>
                     <b-button variant="success" @click="downloadFile(data.value, data.item.fileName)">Download</b-button>
+                    <b-button @click="viewLog(data)">{{ data.detailsShowing ? 'Hide' : 'Show'}} access logs</b-button>
                     <b-button variant="danger" @click="deleteFile(data.value, data.index)">Delete</b-button>
-                </b-button-group>
+                </b-button-group> 
             </template>
+
+            <template #row-details="row">
+                <recordLogs :fileRef="row.item.ref"/>
+            </template>
+            
         </b-table>
     </div>
 </template>
 
 <script>
 import { ApiService } from "@/components/api.js";
+import recordLogs from "@/components/core/RecordLogs"
 
 export default {
     data() {
@@ -73,6 +72,9 @@ export default {
         });
         this.isBusy = false;
     },
+    components: {
+        recordLogs
+    },
     methods: {
         async downloadFile(fileRef, fileName){
             this.isBusy = true;
@@ -104,6 +106,10 @@ export default {
                 this.error = errr.response.data;
             })
             this.isBusy = false;
+        },
+        async viewLog(row){
+            row.toggleDetails();
+            console.log(row);
         }
     },
 }
