@@ -23,7 +23,6 @@
                     <b-nav-item to="/editAttributes">Edit Attributes</b-nav-item>
                   </template>
                   <template v-else-if="user.role =='admin'">
-                    <b-nav-item href="#">View Logs</b-nav-item>
                     <b-nav-item to="/admin/registerDP">Add DP</b-nav-item>
                   </template>
                 </b-navbar-nav>

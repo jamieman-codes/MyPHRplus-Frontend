@@ -48,7 +48,7 @@
                 <div class="form-group row">
                   <label for="DP" class="col-md-4 col-form-label text-md-right">Choose a hospital to Register with</label>
                   <div class="col-md-6">
-                    <v-select label="text" required :options="options" v-model="form.DP" :reduce="text => text.value"></v-select>
+                    <v-select label="text" required :options="options" v-model="form.parent" :reduce="text => text.value"></v-select>
                   </div>
                 </div>
 
@@ -80,7 +80,7 @@ export default {
         email: "",
         password: "",
         nhsnum: "",
-        DP: ""
+        parent: ""
       },
       options: null,
       error: null,
@@ -114,16 +114,14 @@ export default {
 
 
       firebase.auth().createUserWithEmailAndPassword(this.form.email, this.form.password) //Creates user with firebase Auth
-        .then((data) => {
+        .then(async (data) => {
               data.user.updateProfile({ displayName: this.form.name });
-              data.user.getIdToken(true).then(async (idToken) => { //Generate ID token to be sent 
-                await ApiService.registerPatient(this.form.name, this.form.email, idToken, this.form.nhsnum, this.form.DP).then(() => {
-                  this.$router.push({ name: 'Dashboard'});
-                })
-            })
+              await ApiService.registerPatient(this.form.name, this.form.email, this.form.nhsnum, this.form.parent).then(() => {
+                this.$router.push({ name: 'Dashboard'});
+              })
             .catch(errr => {
-            data.user.delete(); //Delete user if registration fails 
-            this.error = errr.response.data;
+              data.user.delete(); //Delete user if registration fails 
+              this.error = errr.response.data;
           });
         })
         .catch(errr => {
