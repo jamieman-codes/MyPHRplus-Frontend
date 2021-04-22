@@ -4,8 +4,8 @@ import store from "@/store";
 
 
 const client = axios.create({
-    baseURL: 'http://127.0.0.1:8081/',
-    //baseURL: 'https://myphrplus-backend.nw.r.appspot.com/',
+    //baseURL: 'http://127.0.0.1:8081/',
+    baseURL: 'https://myphrplus-backend.nw.r.appspot.com/',
 });
 
 // HTTP interceptor to add the firebase id token to the headers. Used by the api for identification and authentication
